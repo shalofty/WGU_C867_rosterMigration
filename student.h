@@ -25,6 +25,7 @@ private: // all external access/mutation must occur from public functions
     vector<int> days_to_complete;
 
     // var focus, type DegreeProgram. Ref degree.h to see values
+    // named focus instead of degreeprogram to avoid confusion during coding
     DegreeProgram focus;
 
 public: // public functions to access/mutate private variables
@@ -77,9 +78,7 @@ public: // public functions to access/mutate private variables
     DegreeProgram getFocus();
 
     // Print student attributes function
-    void print(attributes) {
-
-    };
+    void print(attributes printat);
 
 };
 

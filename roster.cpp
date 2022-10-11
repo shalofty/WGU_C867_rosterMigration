@@ -24,8 +24,8 @@ void roster::add(string studentID, string fname, string lname, string email,
 
 }
 
-// Roster Del function
-void roster::del(string studentID) {
+// Roster remove function
+void roster::remove(string studentID) {
     // assigning locatedID variable of type bool
     bool locatedID = false;
     // iterating through classRosterArray using for loop
@@ -43,8 +43,8 @@ void roster::del(string studentID) {
     }
 }
 
-// Print student attributes using attributes enum in student.h
-void roster::printAttributes() {
+// printALl student attributes using attributes enum in student.h
+void roster::printAll() {
     for (size_t i = 0; i < classRosterArray.size(); i++)
     {
         classRosterArray.at(i)->print(attributes::STUDENTID);
@@ -57,8 +57,8 @@ void roster::printAttributes() {
     }
 }
 
-// print byFocus
-void roster::printFocus(DegreeProgram focus) {
+// printFocus function
+void roster::printByDegreeProgram(DegreeProgram focus) {
     // assigning locatedFocus variable of type bool
     bool locatedFocus = false;
     // iterating through classRosterArray
@@ -76,3 +76,5 @@ void roster::printFocus(DegreeProgram focus) {
         }
     }
 }
+
+// incEmail function

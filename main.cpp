@@ -13,9 +13,11 @@ roster sd(const string studentData[], size_t numstu);
 
 int main() {
     // Outputting my information
+    cout << endl;
     cout << "C867 Scripting and Programming in C++" << endl;
     cout << "Stephan Haloftis, Computer Science" << endl;
     cout << "shaloftis@wgu.edu, 010727171" << endl;
+    cout << endl;
 
     // studentData Table from Class Roster Scenario
     const string studentData[] =
@@ -30,6 +32,25 @@ int main() {
 
     // Populate roster
     roster classRoster = sd(studentData, numstu);
+
+    // SPECIFIC RUBRIC OPERATIONS
+    // call printAll function per rubric
+    cout << "Calling printAll() function:" << endl;
+    classRoster.printAll();
+
+    // call printInvalidEmails function per rubric
+    cout << endl;
+    cout << "Calling printByDegreeProgram() function with 'SOFTWARE' parameter:" << endl;
+    classRoster.printByDegreeProgram(DegreeProgram::SOFTWARE);
+    cout << endl;
+
+    // Removing A3
+    classRoster.remove("A3");
+    cout << "printAll() results after calling remove() function on A3:" << endl;
+    classRoster.printAll();
+    cout << endl;
+    cout << "Calling remove() function on A3 again:" << endl;
+    classRoster.remove("A3");
 
     return 0;
 }
@@ -50,59 +71,59 @@ roster sd(const string studentData[], size_t numstu) {
         string com = ","; // declaring comma variable
         size_t acomma = studentData[i].find(com); // finding first comma in string
         string putsID = studentData[i].substr(0, acomma); // assigning string before first comma
-        cout << putsID << endl; // testing line
+//        cout << putsID << endl; // testing line
 
         // parsing for fname
         size_t nexcomma = acomma + 1; // creating next position args for find function
         acomma = studentData[i].find(',', nexcomma); // finding next comma
         string putsfname = studentData[i].substr(nexcomma, acomma - nexcomma); // assigning string in between commas
-        cout << putsfname << endl; // testing line
+//        cout << putsfname << endl; // testing line
 
         // parsing for lname
         nexcomma = acomma + 1; // creating next position args for find function
         acomma = studentData[i].find(',', nexcomma); // finding next comma
         string putslname = studentData[i].substr(nexcomma, acomma - nexcomma); // assigning string in between commas
-        cout << putslname << endl; // testing line
+//        cout << putslname << endl; // testing line
 
         // parsing for email
         nexcomma = acomma + 1; // creating next position args for find function
         acomma = studentData[i].find(',', nexcomma); // finding next comma
         string putsemail = studentData[i].substr(nexcomma, acomma - nexcomma); // assigning string in between commas
-        cout << putsemail << endl; // testing line
+//        cout << putsemail << endl; // testing line
 
         // parsing for age
         nexcomma = acomma + 1; // creating next position args for find function
         acomma = studentData[i].find(',', nexcomma); // finding next comma
         string putsage = studentData[i].substr(nexcomma, acomma - nexcomma); // assigning string in between commas
         int ageit = stoi(putsage); // string to int conversion
-        cout << putsage << endl; // testing line
+//        cout << putsage << endl; // testing line
 
         // parsing for dic1
         nexcomma = acomma + 1; // creating next position args for find function
         acomma = studentData[i].find(',', nexcomma); // finding next comma
         string putsdic1 = studentData[i].substr(nexcomma, acomma - nexcomma); // assigning string in between commas
         int dic1it = stoi(putsdic1); // string to int conversion
-        cout << putsdic1 << endl; // testing line
+//        cout << putsdic1 << endl; // testing line
 
         // parsing for dic2
         nexcomma = acomma + 1; // creating next position args for find function
         acomma = studentData[i].find(',', nexcomma); // finding next comma
         string putsdic2 = studentData[i].substr(nexcomma, acomma - nexcomma); // assigning string in between commas
         int dic2it = stoi(putsdic2); // string to int conversion
-        cout << putsdic2 << endl; // testing line
+//        cout << putsdic2 << endl; // testing line
 
         // parsing for dic3
         nexcomma = acomma + 1; // creating next position args for find function
         acomma = studentData[i].find(',', nexcomma); // finding next comma
         string putsdic3 = studentData[i].substr(nexcomma, acomma - nexcomma); // assigning string in between commas
         int dic3it = stoi(putsdic3); // string to int conversion
-        cout << putsdic3 << endl; // testing line
+//        cout << putsdic3 << endl; // testing line
 
         // parsing for degree focus
         nexcomma = acomma + 1; // creating next position args for find function
         DegreeProgram focus = DegreeProgram::NONE;
         string focusString = studentData[i].substr(nexcomma, studentData[i].length() - nexcomma);
-        cout << focusString << endl; // testing line
+//        cout << focusString << endl; // testing line
 
         // logic to assign proper DegreeProgram values
         if (focusString == " SECURITY")
