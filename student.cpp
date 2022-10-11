@@ -95,29 +95,37 @@ student::student(string studentID, string fname, string lname, string email,
 // print function
 void student::print(attributes printat)
 {
+    int w = 5;
    switch (printat)
    {
        case attributes::STUDENTID:
+           cout << setw(w) << right;
            cout << " SID: " << studentID;
            break;
        case attributes::FNAME:
+           cout << setw(w) << right;
            cout << " First: " << fname;
            break;
        case attributes::LNAME:
+           cout << setw(w) << right;
            cout << " Last: " << lname;
            break;
        case attributes::EMAIL:
+           cout << setw(w) << right;
            cout << " Email: " << email;
            break;
        case attributes::AGE:
+           cout << setw(w) << right;
            cout << " Age: " << age;
            break;
        case attributes::DEGREEPROGRAM:
            // insert value of focus into focusStrings[] array from degree.h
+           cout << setw(w) << right;
            cout << " Degree: " << focusStrings[int(focus)];
            break;
        case attributes::DAYSTOCOMPLETE:
            // iterate through days_to_complete, print each value
+           cout << setw(w) << right;
            cout << " DiC: ";
            for (size_t i = 0; i < days_to_complete.size(); i++)
            {

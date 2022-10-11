@@ -1,6 +1,8 @@
 // imports
 #include <iostream>
 #include <string>
+#include <vector>
+#include <regex>
 
 #include "roster.h"
 #include "degree.h"
@@ -9,7 +11,7 @@
 using namespace std;
 
 // Constructor Function
-roster::roster() {}
+roster::roster() = default;
 
 // Mutator Functions
 // Roster Add function
@@ -59,8 +61,6 @@ void roster::printAll() {
 
 // printFocus function
 void roster::printByDegreeProgram(DegreeProgram focus) {
-    // assigning locatedFocus variable of type bool
-    bool locatedFocus = false;
     // iterating through classRosterArray
     for (size_t i = 0; i < classRosterArray.size(); i++) {
         // comparing focus parameter with classRosterArray iteration values
@@ -77,4 +77,51 @@ void roster::printByDegreeProgram(DegreeProgram focus) {
     }
 }
 
-// incEmail function
+// printAverageDaysInCourse function
+void roster::printAverageDaysInCourse(std::string studentID)
+{
+    // assigning ad variable (average days) of type float
+    float average_days = 0.00;
+    // iterating through classRosterArray
+    for (size_t n = 0; n < classRosterArray.size(); n++)
+    {
+        // comparing studentID with results during iteration
+        if (studentID == classRosterArray.at(n)->getID())
+        {
+            // assigning adv variable of type vector using results from iteration
+            vector<int> adv = classRosterArray.at(n)->getNdtc();
+            for (size_t i = 0; i < adv.size(); i++)
+            {
+                average_days = average_days + adv.at(i);
+            }
+            cout
+            << classRosterArray.at(n)->getID()
+            << ", "
+            << classRosterArray.at(n)->getFname()
+            << " "
+            << classRosterArray.at(n)->getLname()
+            << " takes an average of "
+            << average_days/adv.size()
+            << " days to complete a course"
+            << endl;
+        }
+    }
+}
+
+// printInvalidEmails function
+// http://www.ex-parrot.com/~pdw/Mail-RFC822-Address.html
+// https://stackoverflow.com/questions/22683358/email-validation-expression-w-w-w-w-w-w-allows
+void roster::printInvalidEmails()
+{
+    cout << "ATTENTION: Invalid emails have been located in the roster." << endl;
+    // iterate through classRosterArray
+    for (size_t n = 0; n < classRosterArray.size(); n++)
+    {
+        const regex pattern("^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$");
+        if (!regex_match(classRosterArray.at(n)->getEmail(), pattern))
+        {
+            cout << "Email field for " << classRosterArray.at(n)->getID() << " is invalid." << endl;
+            cout << classRosterArray.at(n)->getEmail() << endl;
+        }
+    }
+}

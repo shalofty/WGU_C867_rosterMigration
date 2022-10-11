@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 
-#include "student.h"
 #include "degree.h"
 #include "roster.h"
 
@@ -21,11 +20,11 @@ int main() {
 
     // studentData Table from Class Roster Scenario
     const string studentData[] =
-            {"A1, John, Smith, John1989@gmail.com, 20, 30, 35, 40, SECURITY",
-             "A2, Suzan, Erickson, Erickson_1990@gmail.com, 19, 50, 30, 40, NETWORK",
-             "A3, Jack, Napoli, The_lawyer99yahoo.com, 19, 20, 40, 33, SOFTWARE",
-             "A4, Erin, Black, Erin.black@comcast.net, 22, 50, 58, 40, SECURITY",
-             "A5, Stephan, Haloftis, shaloft@wgu.edu, 29, 4, 2, 5, SOFTWARE"};
+            {"A1,John,Smith,John1989@gm ail.com,20,30,35,40,SECURITY",
+             "A2,Suzan,Erickson,Erickson_1990@gmailcom,19,50,30,40,NETWORK",
+             "A3,Jack,Napoli,The_lawyer99yahoo.com,19,20,40,33,SOFTWARE",
+             "A4,Erin,Black,Erin.black@comcast.net,22,50,58,40,SECURITY",
+             "A5,Stephan,Haloftis,shaloft@wgu.edu,29,4,2,5,SOFTWARE"};
 
     // Calculating numbers of students
     const size_t numstu = sizeof(studentData)/sizeof(studentData[0]);
@@ -37,9 +36,21 @@ int main() {
     // call printAll function per rubric
     cout << "Calling printAll() function:" << endl;
     classRoster.printAll();
+    cout << endl;
 
     // call printInvalidEmails function per rubric
+    cout << "Calling printInvalidEmails function:" << endl;
+    classRoster.printInvalidEmails();
     cout << endl;
+
+    // call printAverageDays function per rubric
+    cout << "Calling printAverageDaysInCourse function:" << endl;
+    for (size_t n = 0; n < classRoster.classRosterArray.size(); n++)
+    {
+        classRoster.printAverageDaysInCourse(classRoster.classRosterArray.at(n)->getID());
+    }
+    cout << endl;
+
     cout << "Calling printByDegreeProgram() function with 'SOFTWARE' parameter:" << endl;
     classRoster.printByDegreeProgram(DegreeProgram::SOFTWARE);
     cout << endl;
@@ -125,18 +136,18 @@ roster sd(const string studentData[], size_t numstu) {
         string focusString = studentData[i].substr(nexcomma, studentData[i].length() - nexcomma);
 //        cout << focusString << endl; // testing line
 
-        // logic to assign proper DegreeProgram values
-        if (focusString == " SECURITY")
+        // if statement logic to compare focusString value for propery DegreeProgram focus assignment
+        if (focusString == "SECURITY")
         {
             focus = DegreeProgram::SECURITY;
 //            cout << focusString + " if statement print checkpoint" << endl; // testing line
         }
-        else if (focusString == " NETWORK")
+        else if (focusString == "NETWORK")
         {
             focus = DegreeProgram::NETWORK;
 //            cout << focusString + " if statement print checkpoint" << endl; // testing line
         }
-        else if (focusString == " SOFTWARE")
+        else if (focusString == "SOFTWARE")
         {
             focus = DegreeProgram::SOFTWARE;
 //            cout << focusString + " if statement print checkpoint" << endl; // testing line

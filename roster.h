@@ -1,5 +1,6 @@
 #ifndef SCHOOLROSTER_ROSTER_H
 #define SCHOOLROSTER_ROSTER_H
+
 // imports
 #include <iostream>
 #include "degree.h"
@@ -34,11 +35,10 @@ public:
     // printInvalidEmails function
     void printInvalidEmails();
 
-    // Destructor, program will not compile without body
-    ~roster(){
-
-    };
+    // Destructor is explicitly defaulted
+    // https://stackoverflow.com/questions/13576055/how-is-default-different-from-for-default-constructor-and-destructor
+    // https://stackoverflow.com/questions/20828907/the-new-syntax-default-in-c11
+    ~roster()= default;
 };
-
 
 #endif //SCHOOLROSTER_ROSTER_H
