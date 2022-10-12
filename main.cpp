@@ -19,6 +19,8 @@ int main() {
     cout << endl;
 
     // studentData Table from Class Roster Scenario
+
+    // A Modify "studentData Table" to include personal information
     const string studentData[] =
             {"A1,John,Smith,John1989@gm ail.com,20,30,35,40,SECURITY",
              "A2,Suzan,Erickson,Erickson_1990@gmailcom,19,50,30,40,NETWORK",
@@ -45,9 +47,9 @@ int main() {
 
     // call printAverageDays function per rubric
     cout << "Calling printAverageDaysInCourse function:" << endl;
-    for (size_t n = 0; n < classRoster.classRosterArray.size(); n++)
+    for (size_t n = 0; n < numstu; n++)
     {
-        classRoster.printAverageDaysInCourse(classRoster.classRosterArray.at(n)->getID());
+        classRoster.printAverageDaysInCourse(classRoster.classRosterArray[n]->getID());
     }
     cout << endl;
 

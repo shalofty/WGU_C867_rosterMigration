@@ -1,7 +1,7 @@
 // imports
 #include <iostream>
 #include <string>
-#include <vector>
+#include <array>
 #include <regex>
 
 #include "roster.h"
@@ -15,64 +15,57 @@ roster::roster() = default;
 
 // Mutator Functions
 // Roster Add function
-void roster::add(string studentID, string fname, string lname, string email,
-                 int age, int dic1, int dic2, int dic3,
-                 DegreeProgram focus)
+void roster::add(string studentID, string fname, string lname, string email, int age, int dic1, int dic2, int dic3, DegreeProgram focus)
 {
-    // integer vector totDIC for days in course
-    vector<int> totDIC{dic1, dic2, dic3};
-    student* addStudent = new student(studentID, fname, lname, email, age, totDIC, focus);
-    classRosterArray.push_back(addStudent);
-
+    int days_in_course[student::array_size]{dic1, dic2, dic3};
+    classRosterArray[++z] = new student(studentID, fname, lname, email, age, days_in_course, focus);
 }
 
 // Roster remove function
 void roster::remove(string studentID) {
-    // assigning locatedID variable of type bool
     bool locatedID = false;
-    // iterating through classRosterArray using for loop
-    for (size_t i = 0; i < classRosterArray.size(); i++) {
-        // comparing iterated values with function parameter
-        if (studentID == classRosterArray.at(i)->getID())
+    for (i = 0; i <= roster::z; i++)
+    {
+        if (studentID == classRosterArray[i]->getID())
         {
-            delete classRosterArray.at(i);
-            classRosterArray.erase(classRosterArray.begin()+i);
             locatedID = true;
+            if (i < numstu - 1)
+            {
+                student* fill = classRosterArray[i];
+                classRosterArray[i] = classRosterArray[numstu - 1];
+                classRosterArray[numstu -1] = fill;
+            }
+            roster::z--;
+
+            student* fill = classRosterArray[roster::z];
+            classRosterArray[roster::z] = classRosterArray[roster::z - 1];
+            classRosterArray[roster::z - 1] = fill;
         }
     }
-    if (!locatedID) {
-        cout << "Cannot locate ID" << endl;
-    }
-}
-
-// printALl student attributes using attributes enum in student.h
-void roster::printAll() {
-    for (size_t i = 0; i < classRosterArray.size(); i++)
+    if (!locatedID)
     {
-        classRosterArray.at(i)->print(attributes::STUDENTID);
-        classRosterArray.at(i)->print(attributes::FNAME);
-        classRosterArray.at(i)->print(attributes::LNAME);
-        classRosterArray.at(i)->print(attributes::EMAIL);
-        classRosterArray.at(i)->print(attributes::AGE);
-        classRosterArray.at(i)->print(attributes::DEGREEPROGRAM);
-        classRosterArray.at(i)->print(attributes::DAYSTOCOMPLETE);
+        cout << "Attempted to locate student " << studentID << endl;
+        cout << "Cannot locate any student by that ID." << endl;
     }
 }
 
-// printFocus function
-void roster::printByDegreeProgram(DegreeProgram focus) {
-    // iterating through classRosterArray
-    for (size_t i = 0; i < classRosterArray.size(); i++) {
-        // comparing focus parameter with classRosterArray iteration values
-        if (focus == classRosterArray.at(i)->getFocus())
+// print functions
+
+// printAll
+void roster::printAll() {
+    for (i=0;i<=roster::z;i++) {
+        classRosterArray[i]->print();
+    }
+}
+
+// printByDegreeProgram
+void roster::printByDegreeProgram(DegreeProgram focus)
+{
+    for (i = 0; i <= roster::z; i++)
+    {
+        if (roster::classRosterArray[i]->getFocus() == focus)
         {
-            classRosterArray.at(i)->print(attributes::DEGREEPROGRAM);
-            classRosterArray.at(i)->print(attributes::STUDENTID);
-            classRosterArray.at(i)->print(attributes::FNAME);
-            classRosterArray.at(i)->print(attributes::LNAME);
-            classRosterArray.at(i)->print(attributes::EMAIL);
-            classRosterArray.at(i)->print(attributes::AGE);
-            classRosterArray.at(i)->print(attributes::DAYSTOCOMPLETE);
+            classRosterArray[i]->print();
         }
     }
 }
@@ -80,28 +73,18 @@ void roster::printByDegreeProgram(DegreeProgram focus) {
 // printAverageDaysInCourse function
 void roster::printAverageDaysInCourse(std::string studentID)
 {
-    // assigning ad variable (average days) of type float
-    float average_days = 0.00;
-    // iterating through classRosterArray
-    for (size_t n = 0; n < classRosterArray.size(); n++)
+    for (i = 0; i <= roster::z; i++)
     {
-        // comparing studentID with results during iteration
-        if (studentID == classRosterArray.at(n)->getID())
-        {
-            // assigning adv variable of type vector using results from iteration
-            vector<int> adv = classRosterArray.at(n)->getNdtc();
-            for (size_t i = 0; i < adv.size(); i++)
-            {
-                average_days = average_days + adv.at(i);
-            }
+        if (studentID == classRosterArray[i]->getID()) {
+            float average_days = (classRosterArray[i]->getDaysInCourse()[0] + classRosterArray[i]->getDaysInCourse()[1] + classRosterArray[i]-> getDaysInCourse()[2])/3.00;
             cout
-            << classRosterArray.at(n)->getID()
+            << classRosterArray[i]->getID()
             << ", "
-            << classRosterArray.at(n)->getFname()
+            << classRosterArray[i]->getFname()
             << " "
-            << classRosterArray.at(n)->getLname()
+            << classRosterArray[i]->getLname()
             << " takes an average of "
-            << average_days/adv.size()
+            << average_days
             << " days to complete a course"
             << endl;
         }
@@ -115,13 +98,22 @@ void roster::printInvalidEmails()
 {
     cout << "ATTENTION: Invalid emails have been located in the roster." << endl;
     // iterate through classRosterArray
-    for (size_t n = 0; n < classRosterArray.size(); n++)
+    for (size_t n = 0; n < sizeof(classRosterArray) / sizeof(student*); n++)
     {
         const regex pattern("^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$");
-        if (!regex_match(classRosterArray.at(n)->getEmail(), pattern))
+        if (!regex_match(classRosterArray[n]->getEmail(), pattern))
         {
-            cout << "Email field for " << classRosterArray.at(n)->getID() << " is invalid." << endl;
-            cout << classRosterArray.at(n)->getEmail() << endl;
+            cout << "Email field for " << classRosterArray[n]->getID() << " is invalid." << endl;
+            cout << classRosterArray[n]->getEmail() << endl;
         }
+    }
+}
+
+// roster destructor
+
+roster::~roster() {
+    for (i = 0; i < numstu; i++) {
+        delete classRosterArray[i];
+        classRosterArray[i] = nullptr;
     }
 }

@@ -3,14 +3,21 @@
 
 // imports
 #include <iostream>
+#include <vector>
+#include <array>
 #include "degree.h"
 #include "student.h"
 
 class roster {
+private:
+    int i = 0;
+    int z = -1;
 
 public:
     // array of pointers classRosterArray
-    vector<student*> classRosterArray;
+    const static int numstu = 5;
+    student* classRosterArray[numstu];
+
     // Constructor
     roster();
 
@@ -19,9 +26,7 @@ public:
     void remove(std::string studentID);
 
     // add function
-    void add(std::string studentID, std::string fname, std::string lname, std::string email,
-             int age, int dtc1, int dtc2, int dtc3,
-             DegreeProgram focus);
+    void add(std::string studentID, std::string fname, std::string lname, std::string email, int age, int dtc1, int dtc2, int dtc3, DegreeProgram focus);
 
     // printAll function
     void printAll();
@@ -35,10 +40,8 @@ public:
     // printInvalidEmails function
     void printInvalidEmails();
 
-    // Destructor is explicitly defaulted
-    // https://stackoverflow.com/questions/13576055/how-is-default-different-from-for-default-constructor-and-destructor
-    // https://stackoverflow.com/questions/20828907/the-new-syntax-default-in-c11
-    ~roster()= default;
+    // Destructor
+    ~roster();
 };
 
 #endif //SCHOOLROSTER_ROSTER_H

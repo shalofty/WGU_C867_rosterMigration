@@ -7,95 +7,59 @@
 
 using namespace std;
 
+// Constructors
+student::student()
+{
+    this->studentID = "";
+    this->fname = "";
+    this->lname = "";
+    this->email = "";
+    this->age = 0;
+    this->focus = DegreeProgram::NONE;
+
+    for (i = 0; i < array_size; i++)
+    {
+        this->days_in_course[i] = 0;
+    }
+}
+
+student::student(string studentID, string fname, string lname, string email,
+                 int age, int days_in_course[], DegreeProgram focus)
+{
+    this->studentID = studentID;
+    this->fname = fname;
+    this->lname = lname;
+    this->email = email;
+    this->age = age;
+    this->focus = focus;
+    for (int q = 0; q < array_size; q++){this->days_in_course[q] = days_in_course[q];}
+}
+
+// student destructor
+student::~student() {}
+
 // Accessor Functions
-// getID function
-string student::getID() {
-    return studentID;
-}
-
-// getFname function
-string student::getFname() {
-    return fname;
-}
-
-// getLname function
-string student::getLname() {
-    return lname;
-}
-
-// getEmail function
-string student::getEmail() {
-    return email;
-}
-
-// getAge function
-int student::getAge() {
-    return age;
-}
-
-// getNdtc function
-vector<int> student::getNdtc() {
-    return days_to_complete;
-}
-
-// getFocus function
-DegreeProgram student::getFocus() {
-    return focus;
-}
+string student::getID() {return studentID;}
+string student::getFname() {return fname;}
+string student::getLname() {return lname;}
+string student::getEmail() {return email;}
+int student::getAge() {return age;}
+int* student::getDaysInCourse() {return days_in_course;}
+DegreeProgram student::getFocus() {return focus;}
 
 // Mutator Functions
-// setID function
-void student::setID(string studentID) {
-    this->studentID = studentID;
-}
+void student::setID(string studentID) {this->studentID = studentID;}
+void student::setFname(string fname) {this->fname = fname;}
+void student::setLname(string lname) {this->lname = lname;}
+void student::setEmail(string email) {this->email = email;}
+void student::setAge(int age) {this->age = age;}
+void student::setFocus(DegreeProgram focus) {this->focus = focus;}
+void student::setDaysInCourse(int days[]) {for (i = 0; i < array_size; i++) {this->days_in_course[i] = days[i];}}
 
-// setFname function
-void student::setFname(string fname) {
-    this->fname = fname;
-}
-
-// setLname function
-void student::setLname(string lname) {
-    this->lname = lname;
-}
-
-// setEmail function
-void student::setEmail(string email) {
-    this->email = email;
-}
-
-// setAge function
-void student::setAge(int age) {
-    this->age = age;
-}
-
-// setNdtc function
-void student::setNdtc(vector<int> days_to_complete) {
-    this->days_to_complete = days_to_complete;
-}
-
-// setFocus function
-void student::setFocus(DegreeProgram focus) {
-    this->focus = focus;
-}
-
-// student object constructor
-student::student(string studentID, string fname, string lname, string email,
-                 int age, vector<int> days_to_complete, DegreeProgram focus)
-{
-    this->studentID = studentID;
-    this->fname = fname;
-    this->lname = lname;
-    this->email = email;
-    this->age = age;
-    this->focus = focus;
-    this->days_to_complete = days_to_complete;
-}
-
-// print function
+// Print Functions
 void student::print(attributes printat)
 {
-    int w = 5;
+    int w = 5; // Output formatting column width
    switch (printat)
    {
        case attributes::STUDENTID:
@@ -127,11 +91,26 @@ void student::print(attributes printat)
            // iterate through days_to_complete, print each value
            cout << setw(w) << right;
            cout << " DiC: ";
-           for (size_t i = 0; i < days_to_complete.size(); i++)
+           for (size_t a = 0; a < array_size; a++)
            {
-               cout << days_to_complete.at(i) << " ";
+               cout << days_in_course << " ";
            }
            cout << endl;
            break;
    }
+}
+
+// print function for printing specific student data
+void student::print()
+{
+    cout
+    << "SID: " << getID() << "\t"
+    << "First: " << getFname() << "\t"
+    << "Last: " << getLname() << "\t"
+    << "Age: " << getAge() << "\t"
+    << "DIC: {" << getDaysInCourse()[0] << " "
+    << getDaysInCourse()[1] << " "
+    << getDaysInCourse()[2] << "}" << "\t"
+    << "Program: " << focusStrings[(int)getFocus()] << "\t"
+    << endl;
 }
