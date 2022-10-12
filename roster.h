@@ -14,7 +14,7 @@ private:
     int z = -1;
 
 public:
-    // array of pointers classRosterArray
+    // array of pointers classRosterArray and number of student variable
     const static int numstu = 5;
     student* classRosterArray[numstu];
 

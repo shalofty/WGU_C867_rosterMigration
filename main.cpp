@@ -20,7 +20,6 @@ int main() {
 
     // studentData Table from Class Roster Scenario
 
-    // A Modify "studentData Table" to include personal information
     const string studentData[] =
             {"A1,John,Smith,John1989@gm ail.com,20,30,35,40,SECURITY",
              "A2,Suzan,Erickson,Erickson_1990@gmailcom,19,50,30,40,NETWORK",
@@ -35,17 +34,17 @@ int main() {
     roster classRoster = sd(studentData, numstu);
 
     // SPECIFIC RUBRIC OPERATIONS
-    // call printAll function per rubric
+    // call printAll function
     cout << "Calling printAll() function:" << endl;
     classRoster.printAll();
     cout << endl;
 
-    // call printInvalidEmails function per rubric
+    // call printInvalidEmails function
     cout << "Calling printInvalidEmails function:" << endl;
     classRoster.printInvalidEmails();
     cout << endl;
 
-    // call printAverageDays function per rubric
+    // call printAverageDays function
     cout << "Calling printAverageDaysInCourse function:" << endl;
     for (size_t n = 0; n < numstu; n++)
     {
@@ -53,6 +52,7 @@ int main() {
     }
     cout << endl;
 
+    // call printByDegree function
     cout << "Calling printByDegreeProgram() function with 'SOFTWARE' parameter:" << endl;
     classRoster.printByDegreeProgram(DegreeProgram::SOFTWARE);
     cout << endl;

@@ -49,11 +49,10 @@ void roster::remove(string studentID) {
     }
 }
 
-// print functions
-
-// printAll
+// Print Functions
+// printAll which calls print()
 void roster::printAll() {
-    for (i=0;i<=roster::z;i++) {
+    for (i = 0; i <= roster::z; i++) {
         classRosterArray[i]->print();
     }
 }
@@ -110,7 +109,6 @@ void roster::printInvalidEmails()
 }
 
 // roster destructor
-
 roster::~roster() {
     for (i = 0; i < numstu; i++) {
         delete classRosterArray[i];

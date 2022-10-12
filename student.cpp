@@ -35,7 +35,7 @@ student::student(string studentID, string fname, string lname, string email,
     for (int q = 0; q < array_size; q++){this->days_in_course[q] = days_in_course[q];}
 }
 
-// student destructor
+// student Destructor
 student::~student() {}
 
 // Accessor Functions
@@ -56,49 +56,6 @@ void student::setAge(int age) {this->age = age;}
 void student::setFocus(DegreeProgram focus) {this->focus = focus;}
 void student::setDaysInCourse(int days[]) {for (i = 0; i < array_size; i++) {this->days_in_course[i] = days[i];}}
 
-// Print Functions
-void student::print(attributes printat)
-{
-    int w = 5; // Output formatting column width
-   switch (printat)
-   {
-       case attributes::STUDENTID:
-           cout << setw(w) << right;
-           cout << " SID: " << studentID;
-           break;
-       case attributes::FNAME:
-           cout << setw(w) << right;
-           cout << " First: " << fname;
-           break;
-       case attributes::LNAME:
-           cout << setw(w) << right;
-           cout << " Last: " << lname;
-           break;
-       case attributes::EMAIL:
-           cout << setw(w) << right;
-           cout << " Email: " << email;
-           break;
-       case attributes::AGE:
-           cout << setw(w) << right;
-           cout << " Age: " << age;
-           break;
-       case attributes::DEGREEPROGRAM:
-           // insert value of focus into focusStrings[] array from degree.h
-           cout << setw(w) << right;
-           cout << " Degree: " << focusStrings[int(focus)];
-           break;
-       case attributes::DAYSTOCOMPLETE:
-           // iterate through days_to_complete, print each value
-           cout << setw(w) << right;
-           cout << " DiC: ";
-           for (size_t a = 0; a < array_size; a++)
-           {
-               cout << days_in_course << " ";
-           }
-           cout << endl;
-           break;
-   }
-}
 
 // print function for printing specific student data
 void student::print()

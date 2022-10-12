@@ -9,8 +9,6 @@
 
 using namespace std;
 
-// enumerated student attributes
-enum class attributes{STUDENTID, FNAME, LNAME, EMAIL, AGE, DEGREEPROGRAM, DAYSTOCOMPLETE};
 
 // student class
 class student {
@@ -37,9 +35,6 @@ public: // public functions to access/mutate private variables
     int* getDaysInCourse();
     DegreeProgram getFocus();
 
-    // Print student attributes function
-    void print(attributes printat);
-
     // Print
     void print();
 
@@ -52,7 +47,7 @@ private: // all external access/mutation must occur from public functions
 
     string studentID, fname, lname, email;
     int age;
-    int days_in_course[array_size];
+    int days_in_course[array_size]; // UPDATED TO ARRAY TYPE
 
     // var focus, type DegreeProgram. Ref degree.h to see values
     // named focus instead of degreeprogram to avoid confusion during coding
